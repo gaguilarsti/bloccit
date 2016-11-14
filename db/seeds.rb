@@ -47,10 +47,6 @@ Comment.find_or_create_by(
   body: "New unique comment body"
 )
 
-puts "#{Comment.count}"
-
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
-
-puts Post.all
