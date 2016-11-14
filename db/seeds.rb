@@ -30,6 +30,27 @@ posts = Post.all
   )
 end
 
+#Assignment 17 code
+puts "#{Post.count}"
+Post.find_or_create_by(
+  title: "New unique post title",
+  body: "New unique post body"
+)
+puts "#{Post.count}"
+
+post = Post.find_by_title("New unique post title")
+
+puts "#{Comment.count}"
+
+Comment.find_or_create_by(
+  post: post,
+  body: "New unique comment body"
+)
+
+puts "#{Comment.count}"
+
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+
+puts Post.all
