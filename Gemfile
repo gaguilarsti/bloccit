@@ -13,6 +13,7 @@
  #development environment database
  group :development do
    gem 'sqlite3'
+   gem 'pry-rails'
  end
 
 #designating rspec and the version for testing
