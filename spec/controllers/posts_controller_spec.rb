@@ -5,7 +5,7 @@ RSpec.describe PostsController, type: :controller do
   #create a new post and assign random data values
   let(:my_post) { Post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
 
-  describe "GET #index" do
+  describe "GET index" do
     it "returns http success" do
       #test performs a GET on the index and expects the response to be successful.
       get :index
@@ -19,7 +19,7 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  describe "GET #show" do
+  describe "GET show" do
     it "returns http success" do
       get :show, {id: my_post.id}
       expect(response).to have_http_status(:success)
@@ -34,11 +34,11 @@ RSpec.describe PostsController, type: :controller do
       get :show, {id: my_post.id}
 
       expect(assigns(:post)).to eq(my_post)
-    end     
+    end
   end
 
   #when new is invoked a new but unsaved post object is created but not saved.
-  describe "GET #new" do
+  describe "GET new" do
     it "returns http success" do
       get :new
       expect(response).to have_http_status(:success)
@@ -77,12 +77,65 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
-  #
-  # describe "GET #edit" do
-  #   it "returns http success" do
-  #     get :edit
-  #     expect(response).to have_http_status(:success)
-  #   end
-  # end
+  describe "GET edit" do
+    it "returns http success" do
+      get :edit, {id: my_post.id}
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders the #edit view" do
+      get :edit, {id: my_post.id}
+      #expect the edit view to render when a post is edited.
+      expect(response).to render_template :edit
+    end
+    #test that edit assigns the correct post to be updated to @post.
+    it "assigns post to be updated to @post" do
+      get :edit, {id: my_post.id}
+
+      post_instance = assigns(:post)
+
+      expect(post_instance.id).to eq my_post.id
+      expect(post_instance.title).to eq my_post.title
+      expect(post_instance.body).to eq my_post.body
+    end
+  end
+
+  describe "PUT update" do
+    it "updates post with expected attributes" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
+
+      put :update, id: my_post.id, post: {title: new_title, body: new_body}
+      # test that @post was updated with the title and body passed to update.  Also test that @post's id was not changed.
+      updated_post = assigns(:post)
+      expect(updated_post.id).to eq my_post.id
+      expect(updated_post.title).to eq new_title
+      expect(updated_post.body).to eq new_body
+    end
+
+    it "redirects to the updated post" do
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
+      # expect to be redirected to the posts show view after the update.
+      put :update, id: my_post.id, post: {title: new_title, body: new_body}
+      expect(response).to redirect_to my_post
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "deletes the post" do
+      delete :destroy, {id: my_post.id}
+      # search the db for a post with an id equal to my_post.id, which returns an array.
+      # Assign the size of the array to count and expect count to = 0.
+      count = Post.where({id: my_post.id}).size
+      expect(count).to eq 0
+    end
+
+    it "redirects to posts index" do
+      delete :destroy, {id: my_post.id}
+      # expect to be redirected to the posts index view after a post has been deleted.
+      expect(response).to redirect_to posts_path
+    end
+  end
 
 end
