@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  resources :questions
+
   #initially, when we generated Posts, it included the items commented out below but then we switched to the resources method.
   #get 'posts/index'
   #get 'posts/show'
