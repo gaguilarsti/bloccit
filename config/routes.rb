@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # calling the resources method and passing a symbol.
   #instructs Rails to create post routes for creating, updating, viewing and deleting instances of Post.
   resources :posts
+  resources :advertisements
 
   # removed 'get "welcome/index"' because we declared it as the root view.
   # modified the about route to allow users to visit /about, rather than /welcome/about.

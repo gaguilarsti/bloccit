@@ -30,6 +30,21 @@ posts = Post.all
   )
 end
 
+
+
+### FOR ASSIGNMENT 19 CODE - ADVERTISEMENTS ###
+
+#Create Advertisements
+10.times do
+  #Adding a ! to the method instructs it raise an error if there's the problem with the data we're seeding.
+  Advertisement.create!(
+    title: RandomData.random_sentence,
+    body: RandomData.random_paragraph,
+    price: rand(1..100)
+  )
+end
+
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{Advertisement.count} advertisements created"
