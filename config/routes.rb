@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  # get 'sponsored_posts/show'
+  #
+  # get 'sponsored_posts/new'
+  #
+  # get 'sponsored_posts/edit'
+
   #initially, when we generated Posts, it included the items commented out below but then we switched to the resources method.
   #get 'posts/index'
   #get 'posts/show'
@@ -10,6 +16,7 @@ Rails.application.routes.draw do
   # we pass resources :posts to the resources :topics block.  This nests the post routes under the topic routes.
   resources :topics do
     resources :posts, except: [:index]
+    resources :sponsored_posts, except: [:index]
   end
 
   # removed 'get "welcome/index"' because we declared it as the root view.

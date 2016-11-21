@@ -123,7 +123,7 @@ RSpec.describe PostsController, type: :controller do
       expect(count).to eq 0
     end
 
-    it "redirects to posts index" do
+    it "redirects to topics index" do
       delete :destroy, topic_id: my_topic.id, id: my_post.id
       # expect to be redirected to the posts index view after a post has been deleted.
       expect(response).to redirect_to my_topic

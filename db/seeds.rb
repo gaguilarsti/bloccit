@@ -41,7 +41,20 @@ posts = Post.all
   )
 end
 
+#Create sponsored posts
+15.times do
+  #Adding a ! to the method instructs it raise an error if there's the problem with the data we're seeding.
+  SponsoredPost.create!(
+  #Initially here, we referenced a class that doesn't exist.  This is wishful coding but ok.  :)
+    title: RandomData.random_sentence,
+    body: RandomData.random_paragraph,
+    price: rand(1..100)
+  )
+end
+
+
 puts "Seed finished"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{SponsoredPost.count} sponsored posts created"
