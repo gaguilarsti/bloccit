@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :posts, except: [:index]
   end
 
+  #
+  resources :users, only: [:new, :create]
+
   # removed 'get "welcome/index"' because we declared it as the root view.
   # modified the about route to allow users to visit /about, rather than /welcome/about.
   get 'about' => 'welcome#about'

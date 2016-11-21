@@ -36,3 +36,6 @@
 
  #Use Bootstrap
  gem 'bootstrap-sass'
+
+ #Used for encrypting user passwords
+ gem 'bcrypt'
