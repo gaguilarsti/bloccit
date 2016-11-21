@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :posts, except: [:index]
   end
 
-  #
+  #creating only new and create routes for users.
   resources :users, only: [:new, :create]
 
   # removed 'get "welcome/index"' because we declared it as the root view.
