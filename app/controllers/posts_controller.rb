@@ -1,6 +1,9 @@
 class PostsController < ApplicationController
   #we removed the post index route after we nested them under topics.
 
+  #this makes sure that the require_sign_in method is called before each controller action except :show
+  before_action :require_sign_in, except: :show
+
   def show
     #we find the post that corresponds to the id in the params that was passed to show and assign it to @post.
     @post = Post.find(params[:id])
@@ -18,12 +21,18 @@ class PostsController < ApplicationController
 
   def create
     #call Post.new to create a new instance of Post.
-    @post = Post.new
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
+    #we replaced the three items below to use mass assginment.
+    #@post = Post.new
+    #@post.title = params[:post][:title]
+    #@post.body = params[:post][:body]
     @topic = Topic.find(params[:topic_id])
+    #@post.topic = @topic
 
-    @post.topic = @topic
+    #new mass assignment call - post_params is defined below as a private method.
+    @post = @topic.posts.build(post_params)
+
+    # assign to properly scope the new post.
+    @post.user = current_user
 
     #if successfully save, prompt a message and redirect to the post that was created/saved.
 
@@ -41,8 +50,10 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
+    # replaced with mass assignment.
+    #@post.title = params[:post][:title]
+    #@post.body = params[:post][:body]
+    @post.assign_attributes(post_params)
 
     if @post.save
       flash[:notice] = "Post was updated."
@@ -65,6 +76,13 @@ class PostsController < ApplicationController
       render :show
     end
 
+  end
+
+  #PRIVATE METHODS - always add to the bottom of the file because anything below it is PRIVATE
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 
 end

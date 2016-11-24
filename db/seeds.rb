@@ -8,6 +8,17 @@
 
 require 'random_data'
 
+#create users
+5.times do
+  User.create!(
+    name: RandomData.random_name,
+    email: RandomData.random_email,
+    password: RandomData.random_sentence
+  )
+end
+
+users = User.all
+
 #Create topics
 
 15.times do
@@ -24,6 +35,8 @@ topics = Topic.all
   #Adding a ! to the method instructs it raise an error if there's the problem with the data we're seeding.
   Post.create!(
   #Initially here, we referenced a class that doesn't exist.  This is wishful coding but ok.  :)
+    user: users.sample,
+    topic: topics.sample,
     title: RandomData.random_sentence,
     body: RandomData.random_paragraph
   )
@@ -41,7 +54,15 @@ posts = Post.all
   )
 end
 
+#created a specific user (actually updated the first user) with my credentials so that we could easily sign in without manually creating a new user.
+user = User.first
+user.update_attributes!(
+  email: "gama-aguilar@hotmail.com",
+  password: "helloworld"
+)
+
 puts "Seed finished"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{User.count} users created"
