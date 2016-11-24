@@ -39,3 +39,6 @@
 
  #Used for encrypting user passwords
  gem 'bcrypt'
+
+ #Use gravatar
+ gem 'gravtastic'

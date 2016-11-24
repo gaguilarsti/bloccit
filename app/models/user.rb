@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   # register an inline callback directly after the before_save callback.
   before_save { self.email = email.downcase if email.present? }
 
@@ -19,5 +20,7 @@ class User < ActiveRecord::Base
 
   # Using Ruby's has_secure_password method - adds methods to set and authenticate against a BCrypt password.  This mechanism requries you to have a password_digest attribute.  Note - to use this, we needed to install BCrypt gem.
   has_secure_password
+
+
 
 end
