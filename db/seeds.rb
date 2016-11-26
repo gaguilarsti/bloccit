@@ -13,7 +13,8 @@ require 'random_data'
   User.create!(
     name: RandomData.random_name,
     email: RandomData.random_email,
-    password: RandomData.random_sentence
+    password: RandomData.random_sentence,
+    role: 'admin'
   )
 end
 
@@ -57,8 +58,25 @@ end
 #created a specific user (actually updated the first user) with my credentials so that we could easily sign in without manually creating a new user.
 user = User.first
 user.update_attributes!(
-  email: "gama-aguilar@hotmail.com",
-  password: "helloworld"
+  name: 'Gama Aguilar',
+  email: 'gama-aguilar@hotmail.com',
+  password: 'helloworld',
+  role: 'admin'
+)
+
+#create an admin user
+admin = User.create!(
+  name: 'Admin User',
+  email: 'admin@example.com',
+  password: 'helloworld',
+  role: 'admin'
+)
+
+#create a member user
+member = User.create!(
+  name: "Member User",
+  email: 'member@example.com',
+  password: 'helloworld'
 )
 
 puts "Seed finished"

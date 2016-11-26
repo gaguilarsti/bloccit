@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   # register an inline callback directly after the before_save callback.
   before_save { self.email = email.downcase if email.present? }
 
+  # added to use the role column as an enum and below 'enum role: [:member, :admin]'
+  before_save { self.role ||= :member }
+
   # use Ruby's validates function to ensure that name is present and a max and min length.
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
 
@@ -21,5 +24,8 @@ class User < ActiveRecord::Base
 
   # Using Ruby's has_secure_password method - adds methods to set and authenticate against a BCrypt password.  This mechanism requries you to have a password_digest attribute.  Note - to use this, we needed to install BCrypt gem.
   has_secure_password
+
+  #added to use the role column as an enum
+  enum role: [:member, :admin]
 
 end
