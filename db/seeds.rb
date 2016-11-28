@@ -49,6 +49,7 @@ posts = Post.all
 #using an integer on .times will make sure this thing will run x times.
 100.times do
   Comment.create!(
+    user: users.sample,
     # call sample on the array returned by Post.all in order to pick a random post to associate with each comment.
     post: posts.sample,
     body: RandomData.random_paragraph

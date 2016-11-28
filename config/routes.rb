@@ -12,6 +12,13 @@ Rails.application.routes.draw do
     resources :posts, except: [:index]
   end
 
+  #shallow nesting of comments solely under posts
+  # used an empty [] because we don't want to create any /posts/id routes, just posts/:post_id/comments routes.
+  resources :posts, only: [] do
+    #For right now, we are only going to show comments within a posts show view and not allow them to edit, only create and delete.
+    resources :comments, only: [:create, :destroy]
+  end
+
   #
   resources :users, only: [:new, :create]
 
