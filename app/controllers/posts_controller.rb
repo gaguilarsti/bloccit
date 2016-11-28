@@ -71,7 +71,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     # call destroy on @post.  If that call is successful, then flash the notice.  If not, alert the user and redirect to the show view.
-    if @post.destroy
+    if current_user.moderator?
+      flash[:alert] = "You must own this post or be an admin to do that."
+      redirect_to [@post.topic, @post]
+    elsif @post.destroy
       flash[:notice] = "\"#{@post.title}\" was deleted successfully."
       redirect_to @post.topic
     else
