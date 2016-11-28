@@ -9,6 +9,9 @@ RSpec.describe User, type: :model do
   # testing to make sure that users have many comments
   it { is_expected.to have_many(:comments) }
 
+  # adding test for relationship with votes
+  it { is_expected.to have_many(:votes) }
+
   # Shoulda tests for name
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_length_of(:name).is_at_least(1) }

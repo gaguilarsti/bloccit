@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   resources :posts, only: [] do
     #For right now, we are only going to show comments within a posts show view and not allow them to edit, only create and delete.
     resources :comments, only: [:create, :destroy]
+
+    #manually added in routes for clicks on up and down votes
+    post '/up-vote' => 'votes#up_vote', as: :up_vote
+    post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
 
   #
