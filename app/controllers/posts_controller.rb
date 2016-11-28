@@ -91,7 +91,7 @@ class PostsController < ApplicationController
   def authorize_user
     post = Post.find(params[:id])
     # unless the user is the owner of the post or an admin, they get this message and can't do the action.
-    unless current_user == post.user || current_user.admin?
+    unless current_user == post.user || current_user.admin? || current_user.moderator?
       flash[:alert] = "You must own this post or be an admin to do that."
       redirect_to [post.topic, post]
     end

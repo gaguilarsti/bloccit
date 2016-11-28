@@ -80,7 +80,7 @@ class TopicsController < ApplicationController
 
   # define authorize_user, which is used above to redirect non-admins to topics_path (topics index view)
   def authorize_user
-    unless current_user.admin?
+    unless current_user.admin? || current_user.moderator?
       flash[:alert] = "You must be an admin to do that, sorry!"
       redirect_to topics_path
     end
