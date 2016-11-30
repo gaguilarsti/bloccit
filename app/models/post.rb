@@ -1,11 +1,16 @@
 class Post < ActiveRecord::Base
   belongs_to :topic
   belongs_to :user
+
+
   #added the dependent to perform a cascade delete, where the comments get deleted along with a post when a post delete action is taken.
   has_many :comments, dependent: :destroy
 
   #added for relationshp with votes
   has_many :votes, dependent: :destroy
+
+  # for assignment 30 - automatically upvotes a user's post after it is created
+  after_create :create_vote
 
   #added this to show posts in descending order chronologically
   default_scope { order('rank DESC') }
@@ -34,6 +39,12 @@ class Post < ActiveRecord::Base
     age_in_days = (created_at - Time.new(1970,1,1)) / 1.day.seconds
     new_rank = points + age_in_days
     update_attribute(:rank, new_rank)
+  end
+
+  private
+
+  def create_vote
+    user.votes.create(value: 1, post: self)
   end
 
 end
