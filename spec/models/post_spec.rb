@@ -22,6 +22,9 @@ RSpec.describe Post, type: :model do
   # adding relationship to votes
   it { is_expected.to have_many(:votes) }
 
+  # added test for relationship with favorites
+  it { is_expected.to have_many(:favorites) }
+
   it { is_expected.to belong_to(:topic) }
   it { is_expected.to belong_to(:user) }
 

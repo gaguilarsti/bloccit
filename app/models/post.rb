@@ -7,6 +7,8 @@ class Post < ActiveRecord::Base
   #added for relationshp with votes
   has_many :votes, dependent: :destroy
 
+  has_many :favorites, dependent: :destroy
+
   #added this to show posts in descending order chronologically
   default_scope { order('rank DESC') }
 
