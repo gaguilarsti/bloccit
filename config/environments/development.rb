@@ -40,7 +40,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   #added for SendGrid
-  config.action_mailer.default_url_options = { host: 'localhost' }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
-  config.raise_delivery_errors = true 
+  config.raise_delivery_errors = true
 end

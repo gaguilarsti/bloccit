@@ -76,4 +76,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  #added for SendGrid
+  config.action_mailer.default_url_options = { host: 'nameless-wave-47309.herokuapp.com' }
+
 end
