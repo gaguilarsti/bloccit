@@ -12,6 +12,9 @@ class Post < ActiveRecord::Base
   #added this to show posts in descending order chronologically
   default_scope { order('rank DESC') }
 
+  # use a lambda (->) to ensure a user is present or signed in.  If user is signed in, we return all posts.  If not, we return only public topics.
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
+
   #data validations
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true

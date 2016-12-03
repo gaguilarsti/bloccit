@@ -1,11 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
-  #added below when we wanted to associate users with posts - has domino effect on comments.
-  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)}
-  #updating to have comments associated with an owner.
+  # *** We replaced the below specs after we started using factories with the corresponding three items ***
+  # let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
+  # #added below when we wanted to associate users with posts - has domino effect on comments.
+  # let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
+  # let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)}
+
+  # refactored the above using factories
+  let(:topic) { create(:topic) }
+  let(:user) { create(:user) }
+  let(:post) { create(:post) }
+
+  # #updating to have comments associated with an owner.
   let(:comment) {Comment.create!(body: "Comment Body", post: post, user: user)}
 
     it { is_expected.to belong_to(:post) }
