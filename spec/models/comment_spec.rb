@@ -13,7 +13,9 @@ RSpec.describe Comment, type: :model do
   let(:post) { create(:post) }
 
   # #updating to have comments associated with an owner.
-  let(:comment) {Comment.create!(body: "Comment Body", post: post, user: user)}
+  # refactored to use a factory and assignment 32
+  # let(:comment) {Comment.create!(body: "Comment Body", post: post, user: user)}
+  let(:comment) { create(:comment) }
 
     it { is_expected.to belong_to(:post) }
     it { is_expected.to belong_to(:user) }

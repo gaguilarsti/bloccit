@@ -10,7 +10,8 @@ RSpec.describe Vote, type: :model do
   let(:user) { create(:user) }
   let(:post) { create(:post) }
 
-  let(:vote) { Vote.create!(value: 1, post: post, user: user) }
+  # let(:vote) { Vote.create!(value: 1, post: post, user: user) }
+  let(:vote) { create(:vote, post: post, user: user) }
 
   #
   it { is_expected.to belong_to(:post) }

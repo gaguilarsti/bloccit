@@ -13,7 +13,7 @@ require 'rails_helper'
   let(:my_topic) { create(:topic) }
   let(:user_post) { create(:post, topic: my_topic, user: other_user) }
 
-   let(:my_vote) { Vote.create!(value: 1) }
+   let(:my_vote) { create(:vote) }
 
  # *** CONTEXT GUEST ****
    context "guest" do

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 FactoryGirl.define do
   pw = RandomData.random_sentence
   # declaring the name of the factory ':user'

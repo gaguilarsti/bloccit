@@ -13,8 +13,7 @@ require 'random_data'
   User.create!(
     name: RandomData.random_name,
     email: RandomData.random_email,
-    password: RandomData.random_sentence,
-    role: 'admin'
+    password: RandomData.random_sentence
   )
 end
 
